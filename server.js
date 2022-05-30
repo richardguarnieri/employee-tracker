@@ -22,7 +22,7 @@ const viewAllDepartments = async () => {
 
 // View All Roles
 const viewAllRoles = async () => {
-    const [rows, fields] = connection.promise().query(`
+    const [rows, fields] = await connection.promise().query(`
     SELECT role.id, role.title, department.name AS department, role.salary
     FROM employee_tracker.role
     INNER JOIN employee_tracker.department ON role.department_id = department.id;
@@ -35,7 +35,7 @@ const viewAllRoles = async () => {
 
 // View All Employees
 const viewAllEmployees = async() => {
-    const [rows, fields] = connection.promise().query(`
+    const [rows, fields] = await connection.promise().query(`
     SELECT employee1.id, employee1.first_name, employee1.last_name, role.title, department.name AS department, role.salary, CONCAT(employee2.first_name, ' ', employee2.last_name) AS manager
     FROM employee_tracker.employee AS employee1
     LEFT JOIN employee_tracker.employee AS employee2 ON employee1.manager_id = employee2.id
@@ -97,8 +97,8 @@ const userChoicesFn = async () => {
             await viewAllRoles();
             userChoicesFn();
             break;
-        case 'View All Roles':
-            await viewAllRoles();
+        case 'View All Employees':
+            await viewAllEmployees();
             userChoicesFn();
             break;
         default:
