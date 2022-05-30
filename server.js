@@ -141,25 +141,26 @@ const addEmployee = async () => {
             message: "What is the employee's role?: ",
             choices: listOfRoles
         },
-        // {
-        //     type: "list",
-        //     name: "employeeManager",
-        //     message: "Who is the employee's manager?: ",
-        //     choices: listOfEmployees
-        // }
+        {
+            type: "list",
+            name: "employeeManager",
+            message: "Who is the employee's manager?: ",
+            choices: listOfEmployees
+        }
     ])
     // Get the Role id from the Role name answer
     const roleID = roles.filter(role => role.title === result.employeeRole)[0].id;
-    console.log(listOfRoles);
-    console.log(listOfEmployees);
-    console.log(employees);
-    console.log(roleID);
-    console.log(result);
+    const employeeID = employees.filter(employee => employee.name === result.employeeManager)[0].id;
+    // console.log(listOfRoles);
+    // console.log(listOfEmployees);
+    // console.log(employees);
+    // console.log(roleID);
+    // console.log(result);
     await connection.promise().query(`
-    INSERT INTO employee_tracker.role (title, salary, role_id)
-    VALUES (?, ?, ?);
-    `, [result.employeeFirstName, result.employeeLastName, roleID])
-    console.log(`\nRole "${result.employeeFirstName}" with a salary of "$${result.employeeLastName}" under the "${result.employeeRole}" Role has been added to the database! Great work!\n`)
+    INSERT INTO employee_tracker.employee (first_name, last_name, role_id, manager_id)
+    VALUES (?, ?, ?, ?);
+    `, [result.employeeFirstName, result.employeeLastName, roleID, employeeID])
+    console.log(`\nEmployee "${result.employeeFirstName} ${result.employeeLastName}" with the role of "${result.employeeRole}" under the manager "${result.employeeManager}" has been added to the database! Great work!\n`)
 };
 
 const userChoices = [
