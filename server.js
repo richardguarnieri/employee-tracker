@@ -34,7 +34,7 @@ const viewAllRoles = async () => {
 };
 
 // View All Employees
-const viewAllEmployees = async() => {
+const viewAllEmployees = async () => {
     const [rows, fields] = await connection.promise().query(`
     SELECT employee1.id, employee1.first_name, employee1.last_name, role.title, department.name AS department, role.salary, CONCAT(employee2.first_name, ' ', employee2.last_name) AS manager
     FROM employee_tracker.employee AS employee1
@@ -48,6 +48,23 @@ const viewAllEmployees = async() => {
     console.table(rows)
 };
 
+// Add Department
+const addDepartment = async () => {
+    const result = await inquirer.prompt(
+        {
+            type: "input",
+            name: "departmentName",
+            message: "What is the name of the department?: ",
+            validate: stringValidation
+        }
+    )
+    const [rows, fields] = await connection.promise().query(`
+    INSERT INTO employee_tracker.department (name)
+    VALUES (?);
+    `, result.departmentName)
+    console.log(`\nDepartment "${result.departmentName}" has been added to the database! Great work!\n`)
+};
+
 const userChoices = [
     'View All Departments',
     'View All Roles',
@@ -57,7 +74,11 @@ const userChoices = [
     'Add Employee',
     'Update Employee Role',
     'Quit'
-]
+];
+
+const stringValidation = (string) => {
+    return (Number(string) || string.trim().length === 0) ? false : true
+}
 
 const welcomeFn = async () => {
     console.log(`
@@ -78,7 +99,7 @@ const welcomeFn = async () => {
     console.log(`\nLet's start!\n`);
     // await setTimeoutPromise(1_000);
     userChoicesFn();
-}
+};
 
 const userChoicesFn = async () => {
     const choice = await inquirer.prompt(
@@ -88,7 +109,7 @@ const userChoicesFn = async () => {
             message: "What would you like to do?",
             choices: userChoices
         }
-    )
+    );
     switch (choice.userChoice) {
         case 'View All Departments':
             await viewAllDepartments();
@@ -102,11 +123,15 @@ const userChoicesFn = async () => {
             await viewAllEmployees();
             userChoicesFn();
             break;
+        case 'Add Department':
+            await addDepartment();
+            userChoicesFn();
+            break;
         default:
             console.log('\nThank you for using Employee Tracker!\n');
             connection.end();
             break;
-    }
-}
+    };
+};
 
 welcomeFn();
