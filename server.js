@@ -9,18 +9,7 @@ const connection = mysql.createConnection({
     database: "employee_tracker"
 });
 
+// Query Test 1
 connection.query("SELECT * FROM department", (err, results) => {
-    if (err) {
-        console.log(err);
-    }
-    console.log(results)
-})
-// console.table([
-//     {
-//       name: 'foo',
-//       age: 10
-//     }, {
-//       name: 'bar',
-//       age: 20
-//     }
-//   ]);
+    err ? console.log(err) : console.table(results)
+});
