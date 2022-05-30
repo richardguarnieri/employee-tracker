@@ -14,13 +14,16 @@ INNER JOIN employee_tracker.role ON employee1.role_id = role.id
 INNER JOIN employee_tracker.department ON role.department_id = department.id;
 
 -- Add Department
-INSERT INTO department (name)
+INSERT INTO employee_tracker.department (name)
 VALUES (?);
 
 -- Add Role
-INSERT INTO role (title, salary, department_id)
-VALUES (?, ?, ?),
+INSERT INTO employee_tracker.role (title, salary, department_id)
+VALUES (?, ?, ?);
+
 -- Add Employee
+INSERT INTO employee_tracker.employee (first_name, last_name, role_id, manager_id)
+VALUES (?, ?, ?, ?);
 
 WHEN I choose to add a department
 THEN I am prompted to enter the name of the department and that department is added to the database
