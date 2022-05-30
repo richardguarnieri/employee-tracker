@@ -69,18 +69,21 @@ const welcomeFn = async () => {
     await setTimeoutPromise(3_000);
     console.log(`This application accepts user input - you have several options to interact with the database such as: view all departments,\nview all roles, view all employees, add a department, add a role, add an employee, and update an employee role, etc.`);
     await setTimeoutPromise(4_000);
-    console.log(`Let's start!`);
+    console.log(`\nLet's start!\n`);
+    await setTimeoutPromise(1_000);
     userChoicesFn();
 }
 
 const userChoicesFn = async () => {
-    inquirer.prompt(
+    const choice = await inquirer.prompt(
         {
             type: "list",
-            name: "choice",
+            name: "userChoice",
+            message: "What would you like to do?",
             choices: userChoices
         }
     )
+    console.log(choice);
 }
 
 welcomeFn();
