@@ -12,3 +12,8 @@ FROM employee_tracker.employee AS employee1
 LEFT JOIN employee_tracker.employee AS employee2 ON employee1.manager_id = employee2.id
 INNER JOIN employee_tracker.role ON employee1.role_id = role.id
 INNER JOIN employee_tracker.department ON role.department_id = department.id;
+
+-- Update Employee Role
+UPDATE employee_tracker.employee
+SET employee_tracker.role_id = ?, employee_tracker.manager_id= ?
+WHERE employee_tracker.id = ?;
