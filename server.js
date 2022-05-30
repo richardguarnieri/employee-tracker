@@ -127,6 +127,10 @@ const userChoicesFn = async () => {
             await addDepartment();
             userChoicesFn();
             break;
+        case 'Add Role':
+            await addRole();
+            userChoicesFn();
+            break;
         default:
             console.log('\nThank you for using Employee Tracker!\n');
             connection.end();
