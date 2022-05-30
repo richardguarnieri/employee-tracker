@@ -13,6 +13,29 @@ LEFT JOIN employee_tracker.employee AS employee2 ON employee1.manager_id = emplo
 INNER JOIN employee_tracker.role ON employee1.role_id = role.id
 INNER JOIN employee_tracker.department ON role.department_id = department.id;
 
+-- Add Department
+INSERT INTO department (name)
+VALUES (?);
+-- Add Employee
+
+-- Add Role
+
+
+WHEN I choose to add a department
+THEN I am prompted to enter the name of the department and that department is added to the database
+WHEN I choose to add a role
+THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
+WHEN I choose to add an employee
+THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+WHEN I choose to update an employee role
+
+
+
+
+
+
+
+
 -- Update Employee Role
 UPDATE employee_tracker.employee
 SET employee_tracker.role_id = ?, employee_tracker.manager_id= ?
