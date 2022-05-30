@@ -55,7 +55,8 @@ const userChoices = [
     'Add Department',
     'Add Role',
     'Add Employee',
-    'Update Employee Role'
+    'Update Employee Role',
+    'Quit'
 ]
 
 const welcomeFn = async () => {
@@ -102,6 +103,8 @@ const userChoicesFn = async () => {
             userChoicesFn();
             break;
         default:
+            console.log('\nThank you for using Employee Tracker!\n');
+            connection.end();
             break;
     }
 }
