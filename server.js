@@ -10,6 +10,7 @@ const connection = mysql.createConnection({
     database: "employee_tracker"
 });
 
+// --- MySQL Queries ---
 // View All Departments
 const viewAllDepartments = async () => {
     const [rows, fields] = await connection.promise().query(`SELECT * FROM employee_tracker.department`)
@@ -20,29 +21,32 @@ const viewAllDepartments = async () => {
 };
 
 // View All Roles
-const viewAllRoles = () => {
-    connection.query(`
+const viewAllRoles = async () => {
+    const [rows, fields] = connection.promise().query(`
     SELECT role.id, role.title, department.name AS department, role.salary
     FROM employee_tracker.role
     INNER JOIN employee_tracker.department ON role.department_id = department.id;
-    `, (err, results) => {
-        err ? console.log(err) : console.table(results)
-    })
+    `)
+    console.log('\n--------------------------------------------------')
+    console.log('                Showing All Roles                 ')
+    console.log('--------------------------------------------------')
+    console.table(rows)
 };
 
 // View All Employees
-const viewAllEmployees = () => {
-    connection.query(`
+const viewAllEmployees = async() => {
+    const [rows, fields] = connection.promise().query(`
     SELECT employee1.id, employee1.first_name, employee1.last_name, role.title, department.name AS department, role.salary, CONCAT(employee2.first_name, ' ', employee2.last_name) AS manager
     FROM employee_tracker.employee AS employee1
     LEFT JOIN employee_tracker.employee AS employee2 ON employee1.manager_id = employee2.id
     INNER JOIN employee_tracker.role ON employee1.role_id = role.id
     INNER JOIN employee_tracker.department ON role.department_id = department.id;
-    `, (err, results) => {
-        err ? console.log(err) : console.table(results)
-    })
+    `)
+    console.log('\n--------------------------------------------------')
+    console.log('              Showing All Employees               ')
+    console.log('--------------------------------------------------')
+    console.table(rows)
 };
-
 
 const userChoices = [
     'View All Departments',
@@ -87,11 +91,14 @@ const userChoicesFn = async () => {
     switch (choice.userChoice) {
         case 'View All Departments':
             await viewAllDepartments();
-            // await setTimeoutPromise(5_000);
             userChoicesFn();
             break;
         case 'View All Roles':
-            viewAllRoles();
+            await viewAllRoles();
+            userChoicesFn();
+            break;
+        case 'View All Roles':
+            await viewAllRoles();
             userChoicesFn();
             break;
         default:
