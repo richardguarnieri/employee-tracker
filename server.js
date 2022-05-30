@@ -19,7 +19,10 @@ const getRoles = async () => {
     return rows;
 };
 const getEmployees = async () => {
-    const [rows, fields] = await connection.promise().query(`SELECT employee.id, CONCAT(employee.first_name, ' ', employee.last_name) AS name FROM employee_tracker.employee`)
+    const [rows, fields] = await connection.promise().query(`
+    SELECT employee.id, CONCAT(employee.first_name, ' ', employee.last_name) AS name 
+    FROM employee_tracker.employee
+    `)
     return rows;
 };
 
@@ -116,10 +119,10 @@ const addRole = async () => {
 
 // Add Employee
 const addEmployee = async () => {
-    // Get SQL query result - this will return an array of objects, each object with id, title, salary and department property
+    // Get SQL query result - this will return an array of objects for both roles and employees.
     const roles = await getRoles();
     const employees = await getEmployees();
-    // Get a list of the title property of the roles i.e., the role titles. This is used on inquirer as the choices array.
+    // Get a list of the title property of the roles and a list of the name property of the employees i.e., the role titles and employee names. This is used on inquirer as the choices array.
     const listOfRoles = roles.map(role => role.title);
     const listOfEmployees = employees.map(employee => employee.name);
     const result = await inquirer.prompt([
@@ -148,7 +151,7 @@ const addEmployee = async () => {
             choices: listOfEmployees
         }
     ])
-    // Get the Role id from the Role name answer
+    // Get the role id and employee id from the answer
     const roleID = roles.filter(role => role.title === result.employeeRole)[0].id;
     const employeeID = employees.filter(employee => employee.name === result.employeeManager)[0].id;
     // console.log(listOfRoles);
@@ -176,8 +179,8 @@ const userChoices = [
 
 const stringValidation = (string) => {
     return (Number(string) || string.trim().length === 0) ? false : true
-
 }
+
 const numberValidation = (string) => {
     return (!Number(string)) ? false : true
 }
