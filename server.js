@@ -9,7 +9,15 @@ const connection = mysql.createConnection({
     database: "employee_tracker"
 });
 
-// Query Test 1
-connection.query("SELECT * FROM employee_tracker.department", (err, results) => {
+// View All Departments
+connection.query(`SELECT * FROM employee_tracker.department`, (err, results) => {
+    err ? console.log(err) : console.table(results)
+});
+// View All Roles
+connection.query(`
+SELECT role.id, role.title, department.name AS department, role.salary
+FROM employee_tracker.role
+INNER JOIN employee_tracker.department ON role.department_id = department.id;
+`, (err, results) => {
     err ? console.log(err) : console.table(results)
 });
