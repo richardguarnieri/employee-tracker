@@ -10,6 +10,11 @@ const connection = mysql.createConnection({
     database: "employee_tracker"
 });
 
+const getDepartments = async () => {
+    const [rows, fields] = await connection.promise().query(`SELECT * FROM employee_tracker.department`)
+    return rows;
+};
+
 // --- MySQL Queries ---
 // View All Departments
 const viewAllDepartments = async () => {
@@ -56,6 +61,36 @@ const addDepartment = async () => {
             name: "departmentName",
             message: "What is the name of the department?: ",
             validate: stringValidation
+        }
+    )
+    const [rows, fields] = await connection.promise().query(`
+    INSERT INTO employee_tracker.department (name)
+    VALUES (?);
+    `, result.departmentName)
+    console.log(`\nDepartment "${result.departmentName}" has been added to the database! Great work!\n`)
+};
+
+// Add Role
+const addRole = async () => {
+    const departments = getDepartments();
+    const result = await inquirer.prompt(
+        {
+            type: "input",
+            name: "roleTitle",
+            message: "What is the title of the role?: ",
+            validate: stringValidation
+        },
+        {
+            type: "input",
+            name: "roleSalary",
+            message: "What is the salary of the role?: ",
+            validate: stringValidation
+        },
+        {
+            type: "list",
+            name: "roleDepartment",
+            message: "What is the department of the role?: ",
+            choices: 'ss',
         }
     )
     const [rows, fields] = await connection.promise().query(`
