@@ -92,7 +92,7 @@ const addRole = async () => {
         {
             type: "list",
             name: "roleDepartment",
-            message: "What is the department of the role?: ",
+            message: "Which department does the role belong to?: ",
             choices: listOfDepartments
         }
     ])
