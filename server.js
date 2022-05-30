@@ -42,7 +42,15 @@ const viewAllEmployees = () => {
 };
 
 
-
+const userChoices = [
+    'View All Departments',
+    'View All Roles',
+    'View All Employees',
+    'Add Department',
+    'Add Role',
+    'Add Employee',
+    'Update Employee Role'
+]
 
 
 const welcomeFn = async () => {
