@@ -18,6 +18,10 @@ const getRoles = async () => {
     const [rows, fields] = await connection.promise().query(`SELECT * FROM employee_tracker.role`)
     return rows;
 };
+const getEmployees = async () => {
+    const [rows, fields] = await connection.promise().query(`SELECT employee.id, CONCAT(employee.first_name, ' ', employee.last_name) AS name FROM employee_tracker.employee`)
+    return rows;
+};
 
 // --- MySQL Queries ---
 // View All Departments
@@ -114,35 +118,45 @@ const addRole = async () => {
 const addEmployee = async () => {
     // Get SQL query result - this will return an array of objects, each object with id, title, salary and department property
     const roles = await getRoles();
+    const employees = await getEmployees();
     // Get a list of the title property of the roles i.e., the role titles. This is used on inquirer as the choices array.
     const listOfRoles = roles.map(role => role.title);
+    const listOfEmployees = employees.map(employee => employee.name);
     const result = await inquirer.prompt([
         {
             type: "input",
             name: "employeeFirstName",
-            message: "What is the title of the role?: ",
+            message: "What is the employee's first name?: ",
             validate: stringValidation
         },
         {
             type: "input",
             name: "employeeLastName",
-            message: "What is the salary of the role?: ",
+            message: "What is the employee's last name?: ",
             validate: stringValidation
         },
         {
             type: "list",
             name: "employeeRole",
-            message: "What is the Role of the role?: ",
+            message: "What is the employee's role?: ",
             choices: listOfRoles
-        }
+        },
+        // {
+        //     type: "list",
+        //     name: "employeeManager",
+        //     message: "Who is the employee's manager?: ",
+        //     choices: listOfEmployees
+        // }
     ])
     // Get the Role id from the Role name answer
     const roleID = roles.filter(role => role.title === result.employeeRole)[0].id;
     console.log(listOfRoles);
+    console.log(listOfEmployees);
+    console.log(employees);
     console.log(roleID);
     console.log(result);
     await connection.promise().query(`
-    INSERT INTO employee_tracker.role (title, salary, Role_id)
+    INSERT INTO employee_tracker.role (title, salary, role_id)
     VALUES (?, ?, ?);
     `, [result.employeeFirstName, result.employeeLastName, roleID])
     console.log(`\nRole "${result.employeeFirstName}" with a salary of "$${result.employeeLastName}" under the "${result.employeeRole}" Role has been added to the database! Great work!\n`)
