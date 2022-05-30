@@ -10,6 +10,6 @@ const connection = mysql.createConnection({
 });
 
 // Query Test 1
-connection.query("SELECT * FROM department", (err, results) => {
+connection.query("SELECT * FROM employee_tracker.department", (err, results) => {
     err ? console.log(err) : console.table(results)
 });
