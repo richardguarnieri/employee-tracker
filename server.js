@@ -166,6 +166,42 @@ const addEmployee = async () => {
     console.log(`\nEmployee "${result.employeeFirstName} ${result.employeeLastName}" with the role of "${result.employeeRole}" under the manager "${result.employeeManager}" has been added to the database! Great work!\n`)
 };
 
+// Update Employee Role
+const updateEmployeeRole = async () => {
+    // Get SQL query result - this will return an array of objects, each object with id and name property
+    const departments = await getDepartments();
+    // Get a list of the name property of the departments i.e., the department names. This is used on inquirer as the choices array.
+    const listOfDepartments = departments.map(department => department.name);
+    const result = await inquirer.prompt([
+        {
+            type: "input",
+            name: "roleTitle",
+            message: "What is the title of the role?: ",
+            validate: stringValidation
+        },
+        {
+            type: "input",
+            name: "roleSalary",
+            message: "What is the salary of the role?: ",
+            validate: numberValidation
+        },
+        {
+            type: "list",
+            name: "roleDepartment",
+            message: "Which department does the role belong to?: ",
+            choices: listOfDepartments
+        }
+    ])
+    // Get the department id from the department name answer
+    const departmentID = departments.filter(department => department.name === result.roleDepartment)[0].id;
+    console.log(result);
+    await connection.promise().query(`
+    INSERT INTO employee_tracker.role (title, salary, department_id)
+    VALUES (?, ?, ?);
+    `, [result.roleTitle, result.roleSalary, departmentID])
+    console.log(`\nRole "${result.roleTitle}" with a salary of "$${result.roleSalary}" under the "${result.roleDepartment}" department has been added to the database! Great work!\n`)
+};
+
 const userChoices = [
     'View All Departments',
     'View All Roles',
@@ -238,6 +274,10 @@ const userChoicesFn = async () => {
             break;
         case 'Add Employee':
             await addEmployee();
+            userChoicesFn();
+            break;
+        case 'Update Employee Role':
+            await updateEmployeeRole();
             userChoicesFn();
             break;
         default:
