@@ -55,15 +55,15 @@ const viewAllEmployees = async () => {
 
 // Add Department
 const addDepartment = async () => {
-    const result = await inquirer.prompt(
+    const result = await inquirer.prompt([
         {
             type: "input",
             name: "departmentName",
             message: "What is the name of the department?: ",
             validate: stringValidation
         }
-    )
-    const [rows, fields] = await connection.promise().query(`
+    ]);
+    await connection.promise().query(`
     INSERT INTO employee_tracker.department (name)
     VALUES (?);
     `, result.departmentName)
@@ -72,8 +72,11 @@ const addDepartment = async () => {
 
 // Add Role
 const addRole = async () => {
-    const departments = getDepartments();
-    const result = await inquirer.prompt(
+    // Get SQL query result - this will return an array of objects, each object with id and name property
+    const departments = await getDepartments();
+    // Get a list of the name property of the departments i.e., the department names. This is used on inquirer as the choices array.
+    const listOfDepartments = departments.map(department => department.name);
+    const result = await inquirer.prompt([
         {
             type: "input",
             name: "roleTitle",
@@ -84,20 +87,23 @@ const addRole = async () => {
             type: "input",
             name: "roleSalary",
             message: "What is the salary of the role?: ",
-            validate: stringValidation
+            validate: numberValidation
         },
         {
             type: "list",
             name: "roleDepartment",
             message: "What is the department of the role?: ",
-            choices: 'ss',
+            choices: listOfDepartments
         }
-    )
-    const [rows, fields] = await connection.promise().query(`
-    INSERT INTO employee_tracker.department (name)
-    VALUES (?);
-    `, result.departmentName)
-    console.log(`\nDepartment "${result.departmentName}" has been added to the database! Great work!\n`)
+    ])
+    // Get the department id from the department name answer
+    const departmentID = departments.filter(department => department.name === result.roleDepartment)[0].id;
+    console.log(result);
+    await connection.promise().query(`
+    INSERT INTO employee_tracker.role (title, salary, department_id)
+    VALUES (?, ?, ?);
+    `, [result.roleTitle, result.roleSalary, departmentID])
+    console.log(`\nRole "${result.roleTitle}" with a salary of "$${result.roleSalary}" under the "${result.roleDepartment}" department has been added to the database! Great work!\n`)
 };
 
 const userChoices = [
@@ -113,6 +119,10 @@ const userChoices = [
 
 const stringValidation = (string) => {
     return (Number(string) || string.trim().length === 0) ? false : true
+
+}
+const numberValidation = (string) => {
+    return (!Number(string)) ? false : true
 }
 
 const welcomeFn = async () => {
@@ -137,14 +147,14 @@ const welcomeFn = async () => {
 };
 
 const userChoicesFn = async () => {
-    const choice = await inquirer.prompt(
+    const choice = await inquirer.prompt([
         {
             type: "list",
             name: "userChoice",
             message: "What would you like to do?",
             choices: userChoices
         }
-    );
+    ]);
     switch (choice.userChoice) {
         case 'View All Departments':
             await viewAllDepartments();
