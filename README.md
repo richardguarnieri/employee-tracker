@@ -75,8 +75,6 @@ Project Description: `View and Manage Departments, Roles, and Employees in your 
 
 <!-- Table of Contents -->
 ## Table of Contents
-If your README is long, you may choose to use this table of contents to make it easy for users to find what they need.
-
 * [The Project](#the-project)
     * [Technology Stack](#technology-stack)
 * [Getting Started](#getting-started)
@@ -97,25 +95,16 @@ If your README is long, you may choose to use this table of contents to make it 
 
 [![Application Image][application-image]][application-url]
 
-Use this section to provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-
-- What was your motivation?
-- Why did you build this project? (Note: the answer should **never** be "because it was a homework assignment!")
-- What problem does it solve?
-- What did you learn?
+**Employee Tracker** is a CLI (command-line interface) application to view and manage departments, roles, and employees. The application was built using Node.js with Inquirer, MySQL2 and console.table packages.
 
 <p align="right"> - <a href="#home">Return to Home</a></p>
 
 ### Technology Stack
-Use this section to list the technologies used in the project - examples:
-
-* [HTML](https://html.spec.whatwg.org/)
-* [CSS](https://www.w3.org/TR/CSS/#css)
 * [JavaScript](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/)
-* [SASS](https://sass-lang.com/)
-* [Tailwind CSS](https://tailwindcss.com/)
 * [Node.js](https://nodejs.org/en/)
-* [React.js](https://reactjs.org/)
+* [Inquirer](https://www.npmjs.com/package/inquirer)
+* [MySQL2](https://www.npmjs.com/package/mysql2)
+* [console.table](https://www.npmjs.com/package/console.table)
 
 <p align="right"> - <a href="#home">Return to Home</a></p>
 
