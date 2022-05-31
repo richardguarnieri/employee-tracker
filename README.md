@@ -17,7 +17,6 @@ Project Description: `View and Manage Departments, Roles, and Employees in your 
 <!-- Please also update the following links -->
 [logo]: ./img/logo.png
 [application-image]: ./img/app-image.png
-[application-url]: https://example.com/
 
 <div id="home"><div> 
 
@@ -93,7 +92,7 @@ Project Description: `View and Manage Departments, Roles, and Employees in your 
 <!-- The Project -->
 ## The Project
 
-[![Application Image][application-image]][application-url]
+![Application Image][application-image]
 
 **Employee Tracker** is a CLI (command-line interface) application to view and manage departments, roles, and employees. The application was built using Node.js with Inquirer, MySQL2 and console.table packages.
 
@@ -111,17 +110,45 @@ Project Description: `View and Manage Departments, Roles, and Employees in your 
 
 <!-- Getting Started -->
 ## Getting Started
-Use this section to explain how to get the application started - this includes the prerequisites and the installation sections. Feel free to add more sections as needed such as testing, deployment, etc.
+To get started you will need a couple of things - clear explanation of this below:
 
 <p align="right"> - <a href="#home">Return to Home</a></p>
 
 ### Prerequisites
-Use this section to list the prerequisites to run the application.
+[Node.js](https://nodejs.org/en/) as we will need it to install [Inquirer](https://www.npmjs.com/package/inquirer), [MySQL2](https://www.npmjs.com/package/mysql2) and [console.table](https://www.npmjs.com/package/console.table) packages to run the application.
+
+The application will run on the CLI (command-line interface), meaning this will be our only requirement.
 
 <p align="right"> - <a href="#home">Return to Home</a></p>
 
 ### Installation
-Use this section to describe what are the steps required to install your project. Provide a step-by-step description of how to get the development environment running.
+In order to get started, we must first install [Node.js](https://nodejs.org/en/) - on macOS I prefer to install it using the Homebrew package manager and on Windows using the Node.js homepage download section.
+
+**On macOS:**
+1. To install Homebrew on macOS, browse to [Homebrew's official website](https://brew.sh/) and copy the link displayed on the page on the macOS terminal. At the time of writing, this is the command: 
+```shell
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+2. Once Homebrew installation is complete, type the following command to install Node.js and NPM:
+```shell
+brew install node
+```
+
+3. Once the installation finishes, confirm that you successfully installed Node.js by checking its version:
+```shell
+node -v
+```
+
+**On Windows:**
+1. In a web browser, navigate to https://nodejs.org/en/download/. Click the Windows Installer button to download the latest default version. At the time of writing, the latest LTS version is 16.15.0.
+
+2. Execute the installer to install Node.js
+
+3. Once the installation finishes, confirm that you successfully installed Node.js by checking its version:
+```shell
+node -v
+```
 
 <p align="right"> - <a href="#home">Return to Home</a></p>
 
