@@ -190,11 +190,11 @@ const updateEmployeeRole = async () => {
     ])
     // Get the role id and employee id from the answer
     const roleID = roles.filter(role => role.title === result.employeeRole)[0].id;
-    const employeeID = employees.filter(employee => employee.name === result.employeeManager)[0].id;
+    const employeeID = employees.filter(employee => employee.name === result.employeeName)[0].id;
     await connection.promise().query(`
     UPDATE employee_tracker.employee
-    SET employee_tracker.role_id = ?
-    WHERE employee_tracker.id = ?;
+    SET employee_tracker.employee.role_id = ?
+    WHERE employee_tracker.employee.id = ?;
     `, [roleID, employeeID])
     console.log(`\nEmployee "${result.employeeName} has been updated with the role of "${result.employeeRole}"! Great work!\n`)
 };
