@@ -6,7 +6,7 @@ SELECT role.id, role.title, department.name AS department, role.salary
 FROM employee_tracker.role
 INNER JOIN employee_tracker.department ON role.department_id = department.id;
 
--- View All Employees (Incl. Self Join)
+-- View All Employees (incl. Self Join)
 SELECT employee1.id, employee1.first_name, employee1.last_name, role.title, department.name AS department, role.salary, CONCAT(employee2.first_name, ' ', employee2.last_name) AS manager
 FROM employee_tracker.employee AS employee1
 LEFT JOIN employee_tracker.employee AS employee2 ON employee1.manager_id = employee2.id
@@ -29,3 +29,17 @@ VALUES (?, ?, ?, ?);
 UPDATE employee_tracker.employee
 SET employee_tracker.employee.role_id = ?
 WHERE employee_tracker.employee.id = ?;
+
+-- Update Employee Manager
+
+-- View Employees by Manager
+
+-- View Employees by Department
+
+-- Delete Department
+
+-- Delete Role
+
+-- Delete Employee
+
+-- View Department Salary Budget
