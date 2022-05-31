@@ -168,38 +168,35 @@ const addEmployee = async () => {
 
 // Update Employee Role
 const updateEmployeeRole = async () => {
-    // Get SQL query result - this will return an array of objects, each object with id and name property
-    const departments = await getDepartments();
-    // Get a list of the name property of the departments i.e., the department names. This is used on inquirer as the choices array.
-    const listOfDepartments = departments.map(department => department.name);
+    // Get SQL query result - this will return an array of objects for both roles and employees.
+    const roles = await getRoles();
+    const employees = await getEmployees();
+    // Get a list of the title property of the roles and a list of the name property of the employees i.e., the role titles and employee names. This is used on inquirer as the choices array.
+    const listOfRoles = roles.map(role => role.title);
+    const listOfEmployees = employees.map(employee => employee.name);
     const result = await inquirer.prompt([
         {
-            type: "input",
-            name: "roleTitle",
-            message: "What is the title of the role?: ",
-            validate: stringValidation
-        },
-        {
-            type: "input",
-            name: "roleSalary",
-            message: "What is the salary of the role?: ",
-            validate: numberValidation
+            type: "list",
+            name: "employeeName",
+            message: "Which employee's role do you want to update?: ",
+            choices: listOfEmployees
         },
         {
             type: "list",
-            name: "roleDepartment",
-            message: "Which department does the role belong to?: ",
-            choices: listOfDepartments
+            name: "employeeRole",
+            message: "which role do you want to assign the selected employee?: ",
+            choices: listOfRoles
         }
     ])
-    // Get the department id from the department name answer
-    const departmentID = departments.filter(department => department.name === result.roleDepartment)[0].id;
-    console.log(result);
+    // Get the role id and employee id from the answer
+    const roleID = roles.filter(role => role.title === result.employeeRole)[0].id;
+    const employeeID = employees.filter(employee => employee.name === result.employeeManager)[0].id;
     await connection.promise().query(`
-    INSERT INTO employee_tracker.role (title, salary, department_id)
-    VALUES (?, ?, ?);
-    `, [result.roleTitle, result.roleSalary, departmentID])
-    console.log(`\nRole "${result.roleTitle}" with a salary of "$${result.roleSalary}" under the "${result.roleDepartment}" department has been added to the database! Great work!\n`)
+    UPDATE employee_tracker.employee
+    SET employee_tracker.role_id = ?
+    WHERE employee_tracker.id = ?;
+    `, [roleID, employeeID])
+    console.log(`\nEmployee "${result.employeeName} has been updated with the role of "${result.employeeRole}"! Great work!\n`)
 };
 
 const userChoices = [

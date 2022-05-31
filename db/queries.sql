@@ -27,5 +27,5 @@ VALUES (?, ?, ?, ?);
 
 -- Update Employee Role
 UPDATE employee_tracker.employee
-SET employee_tracker.role_id = ?, employee_tracker.manager_id= ?
+SET employee_tracker.role_id = ?
 WHERE employee_tracker.id = ?;
