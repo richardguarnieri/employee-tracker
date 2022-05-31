@@ -1,30 +1,32 @@
-const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 const { setTimeout: setTimeoutPromise } = require('timers/promises');
+const SQL = require('./lib/SQL');
 
-const connection = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "",
-    database: "employee_tracker"
-});
+// const connection = mysql.createConnection({
+//     host: "127.0.0.1",
+//     user: "root",
+//     password: "",
+//     database: "employee_tracker"
+// });
 
-const getDepartments = async () => {
-    const [rows, fields] = await connection.promise().query(`SELECT * FROM employee_tracker.department`)
-    return rows;
-};
-const getRoles = async () => {
-    const [rows, fields] = await connection.promise().query(`SELECT * FROM employee_tracker.role`)
-    return rows;
-};
-const getEmployees = async () => {
-    const [rows, fields] = await connection.promise().query(`
-    SELECT employee.id, CONCAT(employee.first_name, ' ', employee.last_name) AS name 
-    FROM employee_tracker.employee
-    `)
-    return rows;
-};
+// const getDepartments = async () => {
+//     const [rows, fields] = await connection.promise().query(`SELECT * FROM employee_tracker.department`)
+//     return rows;
+// };
+// const getRoles = async () => {
+//     const [rows, fields] = await connection.promise().query(`SELECT * FROM employee_tracker.role`)
+//     return rows;
+// };
+// const getEmployees = async () => {
+//     const [rows, fields] = await connection.promise().query(`
+//     SELECT employee.id, CONCAT(employee.first_name, ' ', employee.last_name) AS name 
+//     FROM employee_tracker.employee
+//     `)
+//     return rows;
+// };
+
+SQL.getDepartments();
 
 // --- MySQL Queries ---
 // View All Departments
