@@ -60,5 +60,7 @@ DELETE FROM employee_tracker.role
 WHERE employee_tracker.role.id = ?;
 
 -- Delete Employee
+DELETE FROM employee_tracker.employee
+WHERE employee_tracker.employee.id = ?;
 
 -- View Department Salary Budget
