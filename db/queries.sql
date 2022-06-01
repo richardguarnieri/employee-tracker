@@ -52,8 +52,11 @@ INNER JOIN employee_tracker.department ON role.department_id = department.id
 WHERE department.id = ?;
 
 -- Delete Department
+DELETE FROM employee_tracker.department
+WHERE employee_tracker.department.id = ?;
 
 -- Delete Role
+
 
 -- Delete Employee
 
