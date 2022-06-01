@@ -63,4 +63,9 @@ WHERE employee_tracker.role.id = ?;
 DELETE FROM employee_tracker.employee
 WHERE employee_tracker.employee.id = ?;
 
--- View Department Salary Budget
+-- View Departments Salary Budget
+SELECT employee_tracker.department.name AS department_name, SUM(employee_tracker.role.salary) AS department_budget
+FROM employee_tracker.role
+LEFT JOIN employee_tracker.department ON employee_tracker.role.department_id = employee_tracker.department.id
+GROUP BY employee_tracker.department.name
+ORDER BY department_budget DESC;
