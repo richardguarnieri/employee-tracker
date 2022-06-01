@@ -56,7 +56,8 @@ DELETE FROM employee_tracker.department
 WHERE employee_tracker.department.id = ?;
 
 -- Delete Role
-
+DELETE FROM employee_tracker.role
+WHERE employee_tracker.role.id = ?;
 
 -- Delete Employee
 
