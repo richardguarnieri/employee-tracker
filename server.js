@@ -15,6 +15,10 @@ const userChoices = [
     'Update Employee Manager',
     'View Employees by Manager',
     'View Employees by Department',
+    'Delete Department',
+    'Delete Role',
+    'Delete Employee',
+    'View Departments Salary Budget',
     'Quit'
 ];
 
@@ -87,6 +91,22 @@ const userChoicesFn = async () => {
             break;
         case 'View Employees by Department':
             await SQL.viewEmployeesByDepartment();
+            userChoicesFn();
+            break;
+        case 'Delete Department':
+            await SQL.deleteDepartment();
+            userChoicesFn();
+            break;
+        case 'Delete Role':
+            await SQL.deleteRole();
+            userChoicesFn();
+            break;
+        case 'Delete Employee':
+            await SQL.deleteEmployee();
+            userChoicesFn();
+            break;
+        case 'View Departments Salary Budget':
+            await SQL.viewDepartmentsSalaryBudget();
             userChoicesFn();
             break;
         default:
