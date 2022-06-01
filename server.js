@@ -33,13 +33,13 @@ const init = async () => {
                    | |             __/ |                                             
                    |_|            |___/                                              
     `);
-    // await setTimeoutPromise(1_000);
+    await setTimeoutPromise(1_000);
     console.log(`Welcome to Employee Tracker! This is a CLI (command-line interface) application that will help you manage a company's employee database`);
-    // await setTimeoutPromise(3_000);
+    await setTimeoutPromise(3_000);
     console.log(`This application accepts user input - you have several options to interact with the database such as: view all departments,\nview all roles, view all employees, add a department, add a role, add an employee, and update an employee role, etc.`);
-    // await setTimeoutPromise(4_000);
+    await setTimeoutPromise(4_000);
     console.log(`\nLet's start!\n`);
-    // await setTimeoutPromise(1_000);
+    await setTimeoutPromise(1_000);
     userChoicesFn();
 };
 
