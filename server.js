@@ -14,6 +14,7 @@ const userChoices = [
     'Update Employee Role',
     'Update Employee Manager',
     'View Employees by Manager',
+    'View Employees by Department',
     'Quit'
 ];
 
@@ -82,6 +83,10 @@ const userChoicesFn = async () => {
             break;
         case 'View Employees by Manager':
             await SQL.viewEmployeesByManager();
+            userChoicesFn();
+            break;
+        case 'View Employees by Department':
+            await SQL.viewEmployeesByDepartment();
             userChoicesFn();
             break;
         default:
