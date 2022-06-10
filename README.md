@@ -240,8 +240,6 @@ See `LICENSE` for more information.
 ## Contact
 Richard Guarnieri: richard.gm@outlook.com · LinkedIn: [rguarnieri][linkedin-url] · Twitter: [@ric_guarnieri][twitter-url]
 
-Application URL: [https://example.com/][application-url]
-
 <p align="right"> - <a href="#home">Return to Home</a></p>
 
 
