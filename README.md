@@ -155,9 +155,59 @@ node -v
 
 <!-- How to Use -->
 ## How to Use
-Use this section to provide instructions and examples for use. Include screenshots as needed.
+First, clone this repo via HTTPS in your local computer - feel free to use any storage destination / folder of your choosing. On macOS / Windows, open the CLI (Command Line Interface) and type the following command (ensure you are located in the exact directory where you want to clone the repo):
 
-To add a screenshot, create an `img` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+```shell
+git clone https://github.com/richardguarnieri/employee-tracker.git
+```
+After the repo has sucessfully cloned, navigate to the repo using the cd (chage directory) command:
+
+```shell
+cd employee-tracker/
+```
+Once inside the employee-tracker directory, install the necessary node pacakges to run the application - in order to do so, pls type on the CLI the following command:
+
+```shell
+npm install
+```
+
+Above command will install [Inquirer](https://www.npmjs.com/package/inquirer), [MySQL2](https://www.npmjs.com/package/mysql2) and [console.table](https://www.npmjs.com/package/console.table) packages along all its dependencies in a newly generated folder within the employee-tracker directory called node_modules/
+
+Once installation finishes, we are clear to execute the application. To do so, run the index.js file typing in the CLI the following command:
+
+```shell
+npm start
+```
+
+After execution, the program will show a welcome message, including brief instructions. Quickly after, you will be presented the following options to choose from:
+
+```shell
+View All Departments
+View All Roles
+View All Employees
+Add Department
+Add Role
+Add Employee
+Update Employee Role
+Update Employee Manager
+View Employees by Manager
+View Employees by Department
+Delete Department
+Delete Role
+Delete Employee
+View Departments Salary Budget
+Quit
+```
+
+Choosing any option runs an SQL query in the background, for example, when you choose to **"View All Departments"**, you are presented with a formatted table showing department names and department ids.
+
+Some queries such as **"Update Employee Role"** requires additional inputs from the user - please ensure the you follow the workflow of the program.
+
+Validations are in place to ensure you do not delete records accidentally. For example, if you decide to delete a department, the program will ask you to ensure you do not have roles or employees mapped to it first. To delete it, ensure you update / delete roles or employees mapped to that department first - you can do this on the options menu.
+
+After selecting any option (except **Quit**), you will be taken back to the options menu.
+
+Choose the **Quit** option to quit the program.
 
 ```md
 ![alt text](assets/images/screenshot.png)
