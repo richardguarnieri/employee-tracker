@@ -118,7 +118,7 @@ To get started you will need a couple of things - clear explanation of this belo
 ### Prerequisites
 [Node.js](https://nodejs.org/en/) as we will need it to install [Inquirer](https://www.npmjs.com/package/inquirer), [MySQL2](https://www.npmjs.com/package/mysql2) and [console.table](https://www.npmjs.com/package/console.table) packages to run the application.
 
-The application will run on the CLI (command-line interface), meaning this will be our only requirement.
+We also need to install **MySQL** - links are provided in the next section.
 
 <p align="right"> - <a href="#home">Return to Home</a></p>
 
@@ -151,6 +151,19 @@ node -v
 node -v
 ```
 
+**MySQL**
+
+After installing Node.js, we then proceed to install MySQL. To do so, please review the following documentation:
+
+Windows: https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html
+
+macOS: https://dev.mysql.com/doc/refman/5.7/en/macos-installation-pkg.html
+
+Preferably, you would also install the MySQL Workbench visual tool. To do so, follow this link:
+https://www.mysql.com/products/workbench/
+
+Please ensure **MySQL** is installed correctly! This is a requirement as we will be in constant communication with the database to perform CRUD operations.
+
 <p align="right"> - <a href="#home">Return to Home</a></p>
 
 
@@ -174,7 +187,11 @@ npm install
 
 Above command will install [Inquirer](https://www.npmjs.com/package/inquirer), [MySQL2](https://www.npmjs.com/package/mysql2) and [console.table](https://www.npmjs.com/package/console.table) packages along all its dependencies in a newly generated folder within the employee-tracker directory called node_modules/
 
-Once installation finishes, we are clear to execute the application. To do so, run the index.js file typing in the CLI the following command:
+Once installation finishes, we must now create the database, tables and seed the tables with data. To do so, please go to the **/db/schema.sql** file and copy all the queries inside this file into MySQL Workbench and run it. Once this is done, please do the same with the **/db/seeds.sql** file.
+
+![](./img/MySQLWorkbench.png)
+
+Once this is done, we are clear to execute the application. To do so, run the index.js file typing in the CLI the following command:
 
 ```shell
 npm start
@@ -210,9 +227,9 @@ After selecting any option (except **Quit**), you will be taken back to the opti
 
 Choose the **Quit** option to quit the program.
 
-```md
-![alt text](assets/images/screenshot.png)
-```
+**YouTube Walkthrough Video:**
+
+[![Application Image](./img/video-thumbnail.png)]()
 
 _For more examples, please refer to the [Documentation][documentation-url]._
 
