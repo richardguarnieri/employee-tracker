@@ -93,6 +93,7 @@ Project Description: `View and Manage Departments, Roles, and Employees in your 
 ## The Project
 
 ![Application Image][application-image]
+![Application Image](./img/ERD.png)
 
 **Employee Tracker** is a CLI (command-line interface) application to view and manage departments, roles, and employees. The application was built using Node.js with Inquirer, MySQL2 and console.table packages.
 
