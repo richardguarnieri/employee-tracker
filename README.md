@@ -229,7 +229,7 @@ Choose the **Quit** option to quit the program.
 
 **YouTube Walkthrough Video:**
 
-[![Application Image](./img/video-thumbnail.png)]()
+[![Application Image](./img/video-thumbnail.png)](https://youtu.be/RSSyv3jeFXk)
 
 _For more examples, please refer to the [Documentation][documentation-url]._
 
